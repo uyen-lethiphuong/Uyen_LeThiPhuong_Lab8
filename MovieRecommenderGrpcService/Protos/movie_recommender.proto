@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "MovieRecommenderGrpcService"; 
+ 
+package movie; 
+ 
+service MovieRecommender { 
+  rpc Recommend (RecommendationRequest) returns (RecommendationReply); 
+} 
+ 
+message RecommendationRequest { 
+  float userId = 1; 
+  float movieId = 2; 
+} 
+ 
+message RecommendationReply { 
+  float score = 1; 
+  bool recommended = 2;
+  string message = 3;
+}

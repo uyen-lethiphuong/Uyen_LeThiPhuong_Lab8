@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Recomandare film prin gRPC";
+}
+
+<h2>Recomandare film (gRPC + ML.NET)</h2>
+
+<form asp-action="Recommend" method="post">
+    <div class="form-group">
+        <label for="userId">User Id</label>
+        <input type="number" step="1" class="form-control" id="userId" name="userId"
+               required />
+    </div>
+
+    <div class="form-group">
+        <label for="movieId">Movie Id</label>
+        <input type="number" step="1" class="form-control" id="movieId" name="movieId"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">
+        Calculează
+        recomandarea
+    </button>
+</form>
+
+@if (ViewBag.Score != null)
+{
+    <hr />
+    <h4>Rezultat:</h4>
+    <p>User: <strong>@ViewBag.UserId</strong></p>
+    <p>Movie: <strong>@ViewBag.MovieId</strong></p>
+    <p>Score ML.NET: <strong>@ViewBag.Score</strong></p>
+    <p>Message: <strong>@ViewBag.Message</strong></p>
+
+    @if (ViewBag.Recommended == true)
+    {
+        <p style="color:green">
+            <strong>
+                Recomandare: Vizionarea filmului este recomandată
+                (score &gt;= 3.5).
+            </strong>
+        </p>
+    }
+    else
+    {
+        <p style="color:red">
+            <strong>
+                Recomandare: Vizionarea filmului NU este
+                recomandată (score &lt; 3.5).
+            </strong>
+        </p>
+    }
+}
